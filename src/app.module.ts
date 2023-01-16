@@ -10,9 +10,11 @@ import * as path from "path";
     ServeStaticModule.forRoot({
       rootPath: path.resolve(__dirname, "static"),
     }),
-    MongooseModule.forRoot(
-      "mongodb+srv://admin:kuzya1704@cluster0.v779xo1.mongodb.net/spotify?retryWrites=true&w=majority"
-    ),
+    MongooseModule.forRootAsync({
+      useFactory: () => ({
+        uri: process.env.DATA_BASE_URL,
+      }),
+    }),
     TrackModule,
     FileModule,
   ],
